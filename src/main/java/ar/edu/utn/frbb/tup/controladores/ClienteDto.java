@@ -1,6 +1,8 @@
 package ar.edu.utn.frbb.tup.controladores;
 
-public class ClienteDto {
+import org.springframework.stereotype.Repository;
+
+public class ClienteDto extends PersonaDto {
     private String banco;
     private String mail;
     private String domicilio;
