@@ -197,7 +197,7 @@ public class ServicioMovimientos {
                     Cuenta cuentaDestino = cuentaDao.findCuenta(Long.parseLong(cbuDestino));
                     if (cuentaDestino == null) {
                         System.out.println("Cuenta destino no encontrada");
-                    } else if (validar.validarModenaDestino(cuentaOrigen.getTipoMoneda(),cuentaDestino.getTipoMoneda())) {
+                    } else if (validar.validarMonedaDestino(cuentaOrigen.getTipoMoneda(),cuentaDestino.getTipoMoneda())) {
                         double monto;
                         do {
                             System.out.print("Ingrese el monto a transferir: ");

@@ -21,15 +21,16 @@ public class ServicioClientes {
 
     ClienteDao clienteDao = new ClienteDao();
 
-    public void findAllClientes() throws ClientesVaciosException {
+    public List<Cliente> findAllClientes() throws ClientesVaciosException {
         clienteDao.findAllClientes();
+        return null;
     }
 
     public void inicializarClientes() {
         clienteDao.inicializarClientes();
     }
 
-    public void crearCliente(List<Cliente> clientes) {
+    public Cliente crearCliente(List<Cliente> clientes) {
 
 
 //        Cliente cliente = inputcliente.ingresarCliente();
@@ -54,6 +55,7 @@ public class ServicioClientes {
         }
         clienteDao.saveCliente(cliente);
 
+        return cliente;
     }
 //    public void crearCliente(){
 //
@@ -103,7 +105,7 @@ public class ServicioClientes {
 //        }
 //    }
 
-public void modificarCliente(List<Cliente> clientes) throws ClienteNoEncontradoException {
+public Cliente modificarCliente(List<Cliente> clientes) throws ClienteNoEncontradoException {
     String dniStr;
     do {
         System.out.print("Ingrese el dni del cliente: ");
@@ -139,6 +141,7 @@ public void modificarCliente(List<Cliente> clientes) throws ClienteNoEncontradoE
         System.out.println("El cliente no se encuentra en el sistema");
     }
 
+    return c;
 }
 //    public void modificarCliente() throws ClientesVaciosException {
 //        String dniStr;

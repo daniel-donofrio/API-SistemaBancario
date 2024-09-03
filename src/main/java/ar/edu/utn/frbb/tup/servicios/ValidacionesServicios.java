@@ -1,13 +1,14 @@
 package ar.edu.utn.frbb.tup.servicios;
 
-import ar.edu.utn.frbb.tup.modelo.Cuenta;
 import ar.edu.utn.frbb.tup.modelo.TipoMoneda;
 
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.Set;
 
 public class ValidacionesServicios {
+
+    // VALIDACIONES DE CLIENTES //
+
     public boolean esMayordeEdad(String fecha) {
         boolean esMayordeEdad = false;
         LocalDate fechaNacimiento = LocalDate.parse(fecha);
@@ -44,6 +45,12 @@ public class ValidacionesServicios {
         return dniValido;
     }
 
+    public boolean validarTipoPersona(String tipoPersona) {
+        return tipoPersona.equals("F") || tipoPersona.equals("J");
+    }
+
+    // VALIDACIONES DE CUENTAS //
+
     public boolean validarCuentaDestino(String cuentaOrigen, String cuentaDestino) {
         if (!Objects.equals(cuentaOrigen, cuentaDestino)) {
             return true;
@@ -53,11 +60,8 @@ public class ValidacionesServicios {
         }
     }
 
-    public boolean validarModenaDestino(TipoMoneda tipoMonedaOrigen, TipoMoneda tipoMonedaDestino) {
+    public boolean validarMonedaDestino(TipoMoneda tipoMonedaOrigen, TipoMoneda tipoMonedaDestino) {
         return tipoMonedaOrigen == tipoMonedaDestino;
     }
 
-    public boolean validarTipoPersona(String tipoPersona) {
-        return tipoPersona.equals("F") || tipoPersona.equals("J");
-    }
 }
