@@ -1,10 +1,12 @@
 package ar.edu.utn.frbb.tup.servicios;
 
 import ar.edu.utn.frbb.tup.modelo.TipoMoneda;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
+@Service
 public class ValidacionesServicios {
 
     // VALIDACIONES DE CLIENTES //
