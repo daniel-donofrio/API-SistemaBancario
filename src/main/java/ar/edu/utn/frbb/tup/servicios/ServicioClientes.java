@@ -14,6 +14,7 @@ import java.util.Scanner;
 @Component
 public class ServicioClientes {
 
+    private List<Cliente> clientes;
     ClienteInputProcessor inputcliente = new ClienteInputProcessor();
     Scanner entrada = new Scanner(System.in);
     ValidacionesServicios validar = new ValidacionesServicios();
@@ -26,8 +27,8 @@ public class ServicioClientes {
         return null;
     }
 
-    public void inicializarClientes() {
-        clienteDao.inicializarClientes();
+    public void inicializarClientes() throws ClientesVaciosException {
+        this.clientes = clienteDao.findAllClientes();  // Cargar los clientes desde el DAO
     }
 
     public Cliente crearCliente(List<Cliente> clientes) {
@@ -185,5 +186,31 @@ public Cliente modificarCliente(List<Cliente> clientes) throws ClienteNoEncontra
             }
         }
         return null;
+    }
+
+    // Método para buscar un cliente por DNI
+    public Cliente buscarClientePorDni(long dni) throws ClienteNoEncontradoException {
+        // Buscar el cliente en la lista de clientes
+        for (Cliente cliente : clientes) {
+            if (cliente.getDni() == dni) {
+                return cliente;  // Si se encuentra, se retorna el cliente
+            }
+        }
+        // Si no se encuentra el cliente, lanzar la excepción
+        throw new ClienteNoEncontradoException("Cliente con DNI " + dni + " no encontrado.");
+    }
+
+    // Mostrar todos los clientes
+    public List<Cliente> mostrarTodosClientes() throws ClientesVaciosException {
+
+        List<Cliente> clientes = clienteDao.findAllClientes();
+
+        if (clientes.isEmpty()){//Si la lista esta vacia significa que no hay clientes registrados
+            throw new ClientesVaciosException("No hay clientes registrados");
+        }
+
+        //Leo toda la lista de clientes, si no hay clientes lanza una excepcion
+        return clientes;
+
     }
 }

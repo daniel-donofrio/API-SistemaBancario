@@ -20,17 +20,33 @@ public class ControladorClientes {
     private ServicioClientes servicioClientes;
     private ValidacionesServicios validacionesServicios;
 
-    public ControladorClientes (ServicioClientes servicioClientes, ValidacionesServicios validacionesServicios) {
+    public ControladorClientes (ServicioClientes servicioClientes, ValidacionesServicios validacionesServicios) throws ClientesVaciosException {
         this.servicioClientes = servicioClientes;
         this.validacionesServicios = validacionesServicios;
         servicioClientes.inicializarClientes();
     }
 
+//    @GetMapping
+//    public ResponseEntity<List<Cliente>> getAllClientes() throws ClientesVaciosException {
+//        List<Cliente> clientes = servicioClientes.findAllClientes();
+//        return new ResponseEntity<>(clientes, HttpStatus.OK);
+//    }
+
     @GetMapping
     public ResponseEntity<List<Cliente>> getAllClientes() throws ClientesVaciosException {
-        List<Cliente> clientes = servicioClientes.findAllClientes();
-        return new ResponseEntity<>(clientes, HttpStatus.OK);
+        return new ResponseEntity<>(servicioClientes.mostrarTodosClientes(), HttpStatus.OK);
     }
+
+    @GetMapping("/{dni}")
+    public ResponseEntity<Cliente> getClientePorDni(@PathVariable long dni) throws ClienteNoEncontradoException, ClientesVaciosException {
+        Cliente cliente = servicioClientes.buscarClientePorDni(dni);
+        if (cliente != null) {
+            return new ResponseEntity<>(cliente, HttpStatus.OK);
+        } else {
+            throw new ClienteNoEncontradoException("Cliente con DNI " + dni + " no encontrado.");
+        }
+    }
+
 
     @PostMapping
     public ResponseEntity<Cliente> crearCliente(@RequestBody ClienteDto clienteDto) throws ClienteExistenteException, ClientesVaciosException {
