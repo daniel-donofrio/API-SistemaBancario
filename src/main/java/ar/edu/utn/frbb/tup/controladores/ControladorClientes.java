@@ -26,12 +26,6 @@ public class ControladorClientes {
         servicioClientes.inicializarClientes();
     }
 
-//    @GetMapping
-//    public ResponseEntity<List<Cliente>> getAllClientes() throws ClientesVaciosException {
-//        List<Cliente> clientes = servicioClientes.findAllClientes();
-//        return new ResponseEntity<>(clientes, HttpStatus.OK);
-//    }
-
     @GetMapping
     public ResponseEntity<List<Cliente>> getAllClientes() throws ClientesVaciosException {
         return new ResponseEntity<>(servicioClientes.mostrarTodosClientes(), HttpStatus.OK);
